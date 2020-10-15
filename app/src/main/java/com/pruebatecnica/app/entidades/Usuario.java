@@ -1,10 +1,12 @@
 package com.pruebatecnica.app.entidades;
-
-
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,11 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+
 
 @Entity
 @Table(name = "Usuarios")
@@ -44,35 +51,53 @@ public class Usuario {
 	@Column(name = "ult_ingreso")
 	private Date ult_ingreso;
 	
-	@Column(name = "nivel", nullable = false)
-	private String nivel;
 	
 	@Column(name = "estado", nullable = false)
 	private String estado;
 	
 	
+	//permisos
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+			name="PermisosUsuario",
+			joinColumns = {
+					@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+			},
+			inverseJoinColumns = {
+					@JoinColumn(name = "permisos_id", referencedColumnName = "id")
+			}
+			
+			)
+	private Set<Permisos> permisos = new HashSet<>();
 	
 	
 	
 	
-	public Usuario() {
-		super();
-	}
+	
+	
 
 
-	public Usuario(String nombre, String apellido, String usuario, String pass,
-			 String nivel) {
-		super();
+	
+	
+	
+	public Usuario(String nombre, String apellido, String usuario, String pass
+) {
+		
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuario = usuario;
 		this.pass = pass;
-		this.setFechaCreacion();
-		this.nivel = nivel;
-		this.estado = "Activo";
+		setFechaCreacion();
+		setEstado("Activo");
+		
+	}
+	
+	public Usuario() {
+		
 	}
 	
 	
+
 	public int getId() {
 		return id;
 	}
@@ -114,24 +139,39 @@ public class Usuario {
 		return ult_ingreso;
 	}
 	public void setUltIngreso(Date ult_ingreso) {
-		this.ult_ingreso = ult_ingreso;
+		this.ult_ingreso = new Date();
+		System.out.println("Ultimo ingreso: " +ult_ingreso);
 	}
-	public String getNivel() {
-		return nivel;
+
+	public Set<Permisos> getPermisos() {
+		return permisos;
 	}
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
+
+
+
+	public void setgetPermisos(Set<Permisos> permisos) {
+		this.permisos = permisos;
 	}
+
+
+
 	public String getEstado() {
 		return estado;
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+
+
+	public boolean isEnabled() {
+		
+		return this.estado.equals("activo");
+	}
 	
+
 	
-	
-	
+
 	
 
 }

@@ -1,45 +1,59 @@
 package com.pruebatecnica.app.seguridad;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.pruebatecnica.app.entidades.Permisos;
+import com.pruebatecnica.app.entidades.Usuario;
 
 public class DetallesUsuario implements UserDetails{
 	
-	private String usuario;
-
-	public DetallesUsuario(String usuario) {
-		// TODO Auto-generated constructor stub
-		this.usuario = usuario;
-	}
 	
-	public DetallesUsuario() {
+	private Usuario usuario;
+	
+	public DetallesUsuario(Usuario usuario) {
+		
+		this.usuario=usuario;
 		
 	}
-	
 	
 	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		Set<Permisos> permisos = usuario.getPermisos();
+		List<SimpleGrantedAuthority> autoridades = new ArrayList<>();
+		
+		for(Permisos permiso : permisos) {
+			
+			autoridades.add(new SimpleGrantedAuthority(permiso.getNombre_permiso()));
+		}
+		
+		return autoridades;
 	}
+
+	
+
+
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return "ok";
+		return usuario.getPass();
 	}
+
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return usuario;
+		return usuario.getUsuario();
 	}
+
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -47,11 +61,13 @@ public class DetallesUsuario implements UserDetails{
 		return true;
 	}
 
+
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
 
 	@Override
 	public boolean isCredentialsNonExpired() {
@@ -59,10 +75,14 @@ public class DetallesUsuario implements UserDetails{
 		return true;
 	}
 
+
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return usuario.isEnabled();
 	}
 
+
+
+	
 }

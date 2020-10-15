@@ -34,7 +34,7 @@ public class ControladorUsuario {
 	// get usuarios
 	@GetMapping("/usuarios")
 	public List<Usuario> getAllUsuarios(){
-		return this.usuarioRepo.findAll();
+		return (List<Usuario>) this.usuarioRepo.findAll();
 		}
 	
 	// get usuario por id
@@ -57,7 +57,7 @@ public class ControladorUsuario {
 		Usuario usuarioActual = this.usuarioRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
 		usuarioActual.setNombre(usuario.getNombre());
 		usuarioActual.setApellido(usuario.getApellido());
-		usuarioActual.setNivel(usuario.getNivel());
+		usuarioActual.setgetPermisos(usuario.getPermisos());
 		usuarioActual.setEstado(usuario.getEstado());
 		usuarioActual.setPass(usuario.getPass());
 		return this.usuarioRepo.save(usuarioActual);
