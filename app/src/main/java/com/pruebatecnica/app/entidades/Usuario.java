@@ -14,6 +14,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -60,6 +63,8 @@ public class Usuario {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
 			name="PermisosUsuario",
+			
+			
 			joinColumns = {
 					@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 			},
@@ -68,8 +73,12 @@ public class Usuario {
 			}
 			
 			)
-	private Set<Permisos> permisos = new HashSet<>();
+	 @JsonManagedReference
+	private Set<Permisos> permisos = new HashSet();;
 	
+	
+	
+
 	
 	
 	
@@ -88,10 +97,20 @@ public class Usuario {
 		this.usuario = usuario;
 		this.pass = pass;
 		setFechaCreacion();
-		setEstado("Activo");
+		this.setEstado("activo");
+
 		
 	}
 	
+	
+
+	
+	
+
+	
+
+
+
 	public Usuario() {
 		
 	}
@@ -143,14 +162,34 @@ public class Usuario {
 		System.out.println("Ultimo ingreso: " +ult_ingreso);
 	}
 
-	public Set<Permisos> getPermisos() {
-		return permisos;
+	
+	
+
+/*
+	public void setgetPermisos(Set<Permisos> permisos) {
+		this.permisos = permisos;
 	}
 
 
+	*/
 
-	public void setgetPermisos(Set<Permisos> permisos) {
+	public Set<Permisos> getPermisos() {
+		if(permisos == null) {
+			permisos = new HashSet();
+		}
+		return permisos;
+	}
+
+	public void setPermisos(Set<Permisos> permisos) {
 		this.permisos = permisos;
+	}
+
+	public Date getFecha_creacion() {
+		return fecha_creacion;
+	}
+
+	public Date getUlt_ingreso() {
+		return ult_ingreso;
 	}
 
 

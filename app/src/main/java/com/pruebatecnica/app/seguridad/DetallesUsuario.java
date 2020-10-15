@@ -31,7 +31,7 @@ public class DetallesUsuario implements UserDetails{
 		
 		for(Permisos permiso : permisos) {
 			
-			autoridades.add(new SimpleGrantedAuthority(permiso.getNombre_permiso()));
+			autoridades.add(new SimpleGrantedAuthority(permiso.getnombre_permiso()));
 		}
 		
 		return autoridades;
