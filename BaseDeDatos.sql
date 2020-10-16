@@ -4,14 +4,14 @@ create database PruebaTecnica;
 USE PruebaTecnica;
 
 
-CREATE TABLE Permisos(
+CREATE TABLE permisos(
 id INT PRIMARY KEY  NOT NULL,
 nombre_permiso VARCHAR(10) NOT NULL 
 );
 
 
 
-CREATE TABLE Usuarios(
+CREATE TABLE usuarios(
 
 id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 nombre VARCHAR(50) NOT NULL,
@@ -24,10 +24,16 @@ estado VARCHAR(10) NOT NULL
 
 );
 
+CREATE TABLE permisos_usuario(
+id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+usuario_id INT  FOREIGN KEY REFERENCES usuarios(id),
+permisos_id INT  FOREIGN KEY REFERENCES permisos(id),
+
+);
 
 
 
-CREATE TABLE Categorias(
+CREATE TABLE categorias(
 
 id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 nombre VARCHAR(50) NOT NULL,
@@ -36,11 +42,10 @@ ult_actualizacion DATE,
 estado VARCHAR(10) NOT NULL
 );
 
-CREATE TABLE Productos(
+CREATE TABLE productos(
 
 id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 nombre VARCHAR(50) NOT NULL,
-cat_id INT FOREIGN KEY REFERENCES Categorias(id),
 costo float,
 precio float,
 tags text,
@@ -51,9 +56,9 @@ ult_actualizacion DATE
 );
 
 
-CREATE TABLE Permisos_Usuario(
+CREATE TABLE categorias_productos(
 id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
-usuario_id INT  FOREIGN KEY REFERENCES Usuarios(id),
-permisos_id INT  FOREIGN KEY REFERENCES Permisos(id),
+categoria_id INT  FOREIGN KEY REFERENCES categorias(id),
+productos_id INT  FOREIGN KEY REFERENCES productos(id)
+)
 
-);

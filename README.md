@@ -59,4 +59,12 @@ incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje 
 - Otros
    - Comentarios en código
    - Formato
+
+
+# Bugs para arreglar
+ -Get en categorias no muestra id.
+
    
+# Autor
+
+Luis Villarreal
