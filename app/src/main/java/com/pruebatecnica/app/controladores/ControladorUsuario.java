@@ -58,6 +58,7 @@ public class ControladorUsuario {
 
 		
 		
+		
 		String nombre = post.getNombre();
 		String usuario_nom  = post.getUsuario();
 		String pass  = post.getPass();

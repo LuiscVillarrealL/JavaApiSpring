@@ -34,6 +34,8 @@ public class DetallesUsuario implements UserDetails{
 			autoridades.add(new SimpleGrantedAuthority(permiso.getnombre_permiso()));
 		}
 		
+		System.out.println(autoridades);
+		
 		return autoridades;
 	}
 

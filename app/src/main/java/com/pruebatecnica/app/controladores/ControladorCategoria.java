@@ -24,81 +24,64 @@ import com.pruebatecnica.app.repositorio.CategoriasRepo;
 
 import com.pruebatecnica.app.repositorio.ProductosRepo;
 
-
-
 @RestController
 @RequestMapping("/api/v1")
 public class ControladorCategoria {
-	
 
 	@Autowired
 	private CategoriasRepo categoriasRepo;
-	
 
-	
 	// get categorias
 	@GetMapping("/categorias")
-	public List<Categorias> getAllCategorias(){
+	public List<Categorias> getAllCategorias() {
 		return (List<Categorias>) this.categoriasRepo.findAll();
-		}
-	
+	}
+
 	// get categorias por id
 	@GetMapping("/categorias/{id}")
 	public Categorias getCategoriaPorId(@PathVariable(value = "id") Integer id) {
-		return this.categoriasRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoExcepcion("Categorias no encontrado"));
+		return this.categoriasRepo.findById(id)
+				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("Categorias no encontrado"));
 	}
-	
-	//post(crear) categoria
+
+	// post(crear) categoria
 	@PostMapping("/categorias")
-	public Categorias crearCategoria( @RequestBody CategoriaPost post ) throws Exception  {
-		
+	public Categorias crearCategoria(@RequestBody CategoriaPost post) throws Exception {
 
 		
 		
 		String nombre = post.getNombre();
 
-		
 		Categorias categoria = new Categorias(nombre);
-		
-		
-	
+
 		return this.categoriasRepo.save(categoria);
 	}
-	
-	
-	//put(update) categorias
-	
-	
-	
+
+	// put(update) categorias
+
 	@PutMapping("/categorias/{id}")
-	public Categorias updateCategorias( @RequestBody CategoriaPost post, @PathVariable ("id") Integer id) {
-		Categorias categoriasActual = this.categoriasRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoExcepcion("categoria no encontrada"));
-		
+	public Categorias updateCategorias(@RequestBody CategoriaPost post, @PathVariable("id") Integer id) {
+		Categorias categoriasActual = this.categoriasRepo.findById(id)
+				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("categoria no encontrada"));
+
 		categoriasActual.setNombre(post.getNombre());
 		categoriasActual.setUlt_actualizacion();
-		
-		if(post.getEstado() != null) {
-			categoriasActual.setEstado(post.getEstado() );
+
+		if (post.getEstado() != null) {
+			categoriasActual.setEstado(post.getEstado());
 		}
 
-	
-	
-
-		
 		return this.categoriasRepo.save(categoriasActual);
 	}
-	
-	
-	
-	//borrar/desactivar por id
-	
+
+	// borrar/desactivar por id
+
 	@DeleteMapping("/categoriasRepo/{id}")
-	public ResponseEntity<Usuario> deactivarUsuario( @PathVariable ("id") Integer id) {
-	//	Usuario usuarioActual = this.categoriasRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
-		
-	   return null;
+	public ResponseEntity<Usuario> deactivarUsuario(@PathVariable("id") Integer id) {
+		// Usuario usuarioActual = this.categoriasRepo.findById(id).orElseThrow(() ->
+		// new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
+
+		return null;
 	}
-	
-		
 
 }

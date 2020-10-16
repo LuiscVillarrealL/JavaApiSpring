@@ -11,7 +11,7 @@ import com.pruebatecnica.app.repositorio.UsuarioRepo;
 public class AppApplication {
 
 	public static void main(String[] args) {
-		System.out.println(org.hibernate.Version.getVersionString());
+
 		SpringApplication.run(AppApplication.class, args);
 	}
 

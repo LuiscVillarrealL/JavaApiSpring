@@ -50,16 +50,16 @@ public class SeguridadConf extends WebSecurityConfigurerAdapter{
 		
 		http.cors().and().csrf().disable();
 		
-		http.authorizeRequests().antMatchers("/api/v1/usuarios/").hasAuthority("ADMIN")
-								.antMatchers("/api/v1/categorias/").hasAnyAuthority("ADMIN","USUARIO")
-								.antMatchers("/api/v1/productos/").hasAnyAuthority("ADMIN","USUARIO")
+		http.authorizeRequests().mvcMatchers("/api/v1/usuarios/**").hasAuthority("ADMIN")
+								.mvcMatchers("/api/v1/categorias").hasAnyAuthority("ADMIN","USER")
+								.mvcMatchers("/api/v1/productos").hasAnyAuthority("ADMIN","USER")
 								.anyRequest().authenticated()
-					            .and()
-					            .formLogin().permitAll()
+					            .and().formLogin();
+					           /* .formLogin().permitAll()
 					            .and()
 					            .logout().permitAll()
 					            .and()
-					            .exceptionHandling().accessDeniedPage("/403")
+					            .exceptionHandling().accessDeniedPage("/403")*/
 					            ;
 		
 		
