@@ -78,13 +78,14 @@ incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje 
 
 
 - Bugs para arreglar
- - Get en categorias no muestra id.
+   - Get en categorias no muestra id
 
 
 # Notas
 
- - Manejo de desactivar usuario
+ - Manejo de desactivación?
  - No valida todos los duplicados
+
 
  # Referencias
    - https://www.javaguides.net/2018/09/spring-boot-spring-mvc-role-based-spring-security-jpa-thymeleaf-mysql-tutorial.html
