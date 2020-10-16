@@ -1,4 +1,4 @@
-package com.pruebatecnica.app.entidades;
+package com.pruebatecnica.app.postobj;
 
 public class UsuarioPost {
 
@@ -18,6 +18,7 @@ public class UsuarioPost {
 		this.permiso = permiso;
 
 	}
+	
 	public UsuarioPost(String nombre, String apellido, String usuario, String pass, String permiso, String estado) {
 
 		this.nombre = nombre;

@@ -60,9 +60,9 @@ public class Usuario {
 	
 	
 	//permisos
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)  //En caso de agregar diferentes tipos de roles se mantiene la relacion mucho a much
 	@JoinTable(
-			name="PermisosUsuario",
+			name="permisos_usuario",
 			
 			
 			joinColumns = {
@@ -74,7 +74,7 @@ public class Usuario {
 			
 			)
 	 @JsonManagedReference
-	private Set<Permisos> permisos = new HashSet();;
+	private Set<Permisos> permisos = new HashSet();
 	
 	
 	
@@ -152,12 +152,15 @@ public class Usuario {
 	@PrePersist
 	public void setFechaCreacion() {
 		this.fecha_creacion = new Date();
-		System.out.println("Se creo un ususario el " + fecha_creacion);
+		System.out.println("Se creo un usuario el " + fecha_creacion);
 	}
 	public Date getUltIngreso() {
 		return ult_ingreso;
 	}
-	public void setUltIngreso(Date ult_ingreso) {
+	
+	
+
+	public void setUltIngreso() {
 		this.ult_ingreso = new Date();
 		System.out.println("Ultimo ingreso: " +ult_ingreso);
 	}
@@ -165,13 +168,6 @@ public class Usuario {
 	
 	
 
-/*
-	public void setgetPermisos(Set<Permisos> permisos) {
-		this.permisos = permisos;
-	}
-
-
-	*/
 
 	public Set<Permisos> getPermisos() {
 		if(permisos == null) {

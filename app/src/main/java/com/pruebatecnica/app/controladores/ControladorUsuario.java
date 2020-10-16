@@ -2,9 +2,7 @@ package com.pruebatecnica.app.controladores;
 
 
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pruebatecnica.app.entidades.Permisos;
 import com.pruebatecnica.app.entidades.Usuario;
-import com.pruebatecnica.app.entidades.UsuarioPost;
 import com.pruebatecnica.app.excepciones.RecursoNoEncontradoExcepcion;
+import com.pruebatecnica.app.postobj.UsuarioPost;
 import com.pruebatecnica.app.repositorio.PermisosRepo;
 import com.pruebatecnica.app.repositorio.UsuarioRepo;
 
@@ -107,6 +104,7 @@ public class ControladorUsuario {
 		usuarioActual.setApellido(post.getApellido());
 		usuarioActual.setEstado(post.getEstado());
 		usuarioActual.setPass(post.getPass());
+		usuarioActual.setUltIngreso();
 		
 		Permisos permiso = this.permisosRepo.getPermisosByNombre(post.getPermiso());
 		
