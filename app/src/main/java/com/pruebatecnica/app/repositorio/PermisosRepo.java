@@ -6,13 +6,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.pruebatecnica.app.entidades.Permisos;
-import com.pruebatecnica.app.entidades.Usuario;
 
 @Repository
-public interface PermisosRepo extends CrudRepository<Permisos, Integer>{
+public interface PermisosRepo extends CrudRepository<Permisos, Integer> {
 
 	@Query("Select u FROM Permisos u WHere u.nombre_permiso = :nombre_permiso")
 	public Permisos getPermisosByNombre(@Param("nombre_permiso") String nombre_permiso);
-	
-	
+
 }

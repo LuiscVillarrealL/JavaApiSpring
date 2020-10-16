@@ -26,7 +26,7 @@
    - Autenticación
        - Tiempo de Sesión: 10 min
        - Usuario/clave 
-       - 403
+       - 403 default
 
 
 - Control de Sesión
@@ -57,7 +57,7 @@
 - Api
    - Logs de Sesión
    - Autenticación
-       -    403
+       - 403 personalizado
 
        
 - Normas
@@ -77,7 +77,7 @@ incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje 
    - Formato
 
 
-- Bugs para arreglar
+# Bugs para arreglar
    - Get en categorias no muestra id
 
 

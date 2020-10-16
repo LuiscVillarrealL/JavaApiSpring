@@ -1,5 +1,7 @@
 package com.pruebatecnica.app.postobj;
 
+
+//Clase para hacer POST/PUT a usuario
 public class UsuarioPost {
 
 	private String nombre;
@@ -9,6 +11,7 @@ public class UsuarioPost {
 	private String permiso;
 	private String estado;
 
+	//Usado en POST
 	public UsuarioPost(String nombre, String apellido, String usuario, String pass, String permiso) {
 
 		this.nombre = nombre;
@@ -18,7 +21,8 @@ public class UsuarioPost {
 		this.permiso = permiso;
 
 	}
-	
+
+	//Usado en PUT
 	public UsuarioPost(String nombre, String apellido, String usuario, String pass, String permiso, String estado) {
 
 		this.nombre = nombre;
@@ -29,18 +33,17 @@ public class UsuarioPost {
 		this.estado = estado;
 
 	}
-	
-	
-	
-	
+
 	public String getEstado() {
 		return estado;
 	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
 	public UsuarioPost() {
-		
+
 	}
 
 	public String getNombre() {
@@ -82,7 +85,5 @@ public class UsuarioPost {
 	public void setPermiso(String permiso) {
 		this.permiso = permiso;
 	}
-	
-	
 
 }

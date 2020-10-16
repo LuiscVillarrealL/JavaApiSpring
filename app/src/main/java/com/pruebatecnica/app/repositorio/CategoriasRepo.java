@@ -6,13 +6,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.pruebatecnica.app.entidades.Categorias;
-import com.pruebatecnica.app.entidades.Productos;
-
 
 @Repository
 public interface CategoriasRepo extends CrudRepository<Categorias, Integer> {
-	
-	
+
 	@Query("Select u FROM Categorias u WHere u.nombre = :nombre")
 	public Categorias getCategoriaByNombre(@Param("nombre") String nombre);
 

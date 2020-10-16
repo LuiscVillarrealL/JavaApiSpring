@@ -1,6 +1,5 @@
 package com.pruebatecnica.app.seguridad;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,17 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
-
 @Configuration
 @EnableWebSecurity
-public class SeguridadConf extends WebSecurityConfigurerAdapter{
+public class SeguridadConf extends WebSecurityConfigurerAdapter {
 
 	@Bean
-    public UserDetailsService userDetailsService() {
-        return new ServicioDetallesUsuario();
-    }
-	
+	public UserDetailsService userDetailsService() {
+		return new ServicioDetallesUsuario();
+	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,46 +26,35 @@ public class SeguridadConf extends WebSecurityConfigurerAdapter{
 	}
 
 	@Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-	
-	 @Bean
-	    public DaoAuthenticationProvider authenticationProvider() {
-	        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-	        authProvider.setUserDetailsService(userDetailsService());
-	        authProvider.setPasswordEncoder(passwordEncoder());
-	         
-	        return authProvider;
-	    }
-	
-	//autorizacion 
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
+	}
+
+	// autorizacion
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 		http.cors().and().csrf().disable();
-		
+
 		http.authorizeRequests().mvcMatchers("/api/v1/usuarios/**").hasAuthority("ADMIN")
-								.mvcMatchers("/api/v1/categorias").hasAnyAuthority("ADMIN","USER")
-								.mvcMatchers("/api/v1/productos").hasAnyAuthority("ADMIN","USER")
-								.anyRequest().authenticated()
-					            .and().formLogin();
-					           /* .formLogin().permitAll()
-					            .and()
-					            .logout().permitAll()
-					            .and()
-					            .exceptionHandling().accessDeniedPage("/403")*/
-					            ;
-		
-		
+				.mvcMatchers("/api/v1/categorias").hasAnyAuthority("ADMIN", "USER").mvcMatchers("/api/v1/productos")
+				.hasAnyAuthority("ADMIN", "USER").anyRequest().authenticated().and().formLogin();
+		/*
+		 * .formLogin().permitAll() .and() .logout().permitAll() .and()
+		 * .exceptionHandling().accessDeniedPage("/403")
+		 */
+		;
+
 	}
-	
-	
-
-
-	
-	
-	
 
 }

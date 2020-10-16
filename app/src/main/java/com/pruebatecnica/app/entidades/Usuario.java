@@ -1,4 +1,5 @@
 package com.pruebatecnica.app.entidades;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,77 +22,51 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-
-
 @Entity
 @Table(name = "Usuarios")
 public class Usuario {
-	
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
-	
+
 	@Column(name = "usuario", nullable = false)
 	private String usuario;
-	
+
 	@Column(name = "pass", nullable = false)
 	private String pass;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_creacion")
 	private Date fecha_creacion;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ult_ingreso")
 	private Date ult_ingreso;
-	
-	
+
 	@Column(name = "estado", nullable = false)
 	private String estado;
-	
-	
-	//permisos
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)  //En caso de agregar diferentes tipos de roles se mantiene la relacion mucho a much
-	@JoinTable(
-			name="permisos_usuario",
-			
-			
-			joinColumns = {
-					@JoinColumn(name = "usuario_id", referencedColumnName = "id")
-			},
-			inverseJoinColumns = {
-					@JoinColumn(name = "permisos_id", referencedColumnName = "id")
-			}
-			
-			)
-	 @JsonManagedReference
+
+	// permisos
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // En caso de agregar diferentes tipos de roles se
+																	// mantiene la relacion mucho a much
+	@JoinTable(name = "permisos_usuario",
+
+			joinColumns = { @JoinColumn(name = "usuario_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "permisos_id", referencedColumnName = "id") }
+
+	)
+	@JsonManagedReference
 	private Set<Permisos> permisos = new HashSet();
-	
-	
-	
 
-	
-	
-	
-	
-	
+	public Usuario(String nombre, String apellido, String usuario, String pass) {
 
-
-	
-	
-	
-	public Usuario(String nombre, String apellido, String usuario, String pass
-) {
-		
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuario = usuario;
@@ -99,23 +74,11 @@ public class Usuario {
 		setFechaCreacion();
 		this.setEstado("activo");
 
-		
 	}
-	
-	
-
-	
-	
-
-	
-
-
 
 	public Usuario() {
-		
+
 	}
-	
-	
 
 	public int getId() {
 		return id;
@@ -124,53 +87,56 @@ public class Usuario {
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido() {
 		return apellido;
 	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
 	public String getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+
 	public String getPass() {
 		return pass;
 	}
+
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
 	public Date getFechaCreacion() {
 		return fecha_creacion;
 	}
-	
+
 	@PrePersist
 	public void setFechaCreacion() {
 		this.fecha_creacion = new Date();
 		System.out.println("Se creo un usuario el " + fecha_creacion);
 	}
+
 	public Date getUltIngreso() {
 		return ult_ingreso;
 	}
-	
-	
 
 	public void setUltIngreso() {
 		this.ult_ingreso = new Date();
-		System.out.println("Ultimo ingreso: " +ult_ingreso);
+		System.out.println("Ultimo ingreso: " + ult_ingreso);
 	}
 
-	
-	
-
-
 	public Set<Permisos> getPermisos() {
-		if(permisos == null) {
+		if (permisos == null) {
 			permisos = new HashSet();
 		}
 		return permisos;
@@ -188,25 +154,17 @@ public class Usuario {
 		return ult_ingreso;
 	}
 
-
-
 	public String getEstado() {
 		return estado;
 	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
-
-
 	public boolean isEnabled() {
-		
+
 		return this.estado.equals("activo");
 	}
-	
-
-	
-
-	
 
 }

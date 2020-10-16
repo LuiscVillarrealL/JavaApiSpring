@@ -11,37 +11,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.pruebatecnica.app.entidades.Permisos;
 import com.pruebatecnica.app.entidades.Usuario;
 
-public class DetallesUsuario implements UserDetails{
-	
-	
+public class DetallesUsuario implements UserDetails {
+
 	private Usuario usuario;
-	
+
 	public DetallesUsuario(Usuario usuario) {
-		
-		this.usuario=usuario;
-		
+
+		this.usuario = usuario;
+
 	}
-	
-	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<Permisos> permisos = usuario.getPermisos();
 		List<SimpleGrantedAuthority> autoridades = new ArrayList<>();
-		
-		for(Permisos permiso : permisos) {
-			
+
+		for (Permisos permiso : permisos) {
+
 			autoridades.add(new SimpleGrantedAuthority(permiso.getnombre_permiso()));
 		}
-		
-		System.out.println(autoridades);
-		
+
 		return autoridades;
 	}
-
-	
-
-
 
 	@Override
 	public String getPassword() {
@@ -49,13 +40,11 @@ public class DetallesUsuario implements UserDetails{
 		return usuario.getPass();
 	}
 
-
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return usuario.getUsuario();
 	}
-
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -63,13 +52,11 @@ public class DetallesUsuario implements UserDetails{
 		return true;
 	}
 
-
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
 
 	@Override
 	public boolean isCredentialsNonExpired() {
@@ -77,14 +64,10 @@ public class DetallesUsuario implements UserDetails{
 		return true;
 	}
 
-
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return usuario.isEnabled();
 	}
 
-
-
-	
 }

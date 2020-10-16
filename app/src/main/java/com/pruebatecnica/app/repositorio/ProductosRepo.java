@@ -7,11 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.pruebatecnica.app.entidades.Productos;
 
-
 @Repository
 public interface ProductosRepo extends CrudRepository<Productos, Integer> {
-	
-	
+
 	@Query("Select u FROM Productos u WHere u.nombre = :nombre")
 	public Productos getProductoByNombre(@Param("nombre") String nombre);
 
