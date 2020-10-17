@@ -1,0 +1,35 @@
+id,nombre,costo,precio,tags,estado,fecha_creacion,ult_actualizacion,categorias/0/nombre,categorias/0/fecha_creacion,categorias/0/ult_actualizacion,categorias/0/estado,enabled
+1,good sense tussin,142.4,82.23,"med, okd",activo,,,medicinas,,,activo,true
+2,Oldsmobile,876.16,4830.02,ok,activo,,,carros,,,activo,true
+3,Sandhill crane,9.41,362.42,etc,activo,,,animales,,,activo,true
+4,CLE DE PEAU BEAUTE SMOOTHING BASE FOR LINES,73.6,250.8,ok,activo,,,medicinas,,,activo,true
+5,Jaguar,260.99,3635.64,etc,activo,,,carros,,,activo,true
+6,Sandhill crane,9.41,362.42,etc,activo,,,animales,,,activo,true
+7,Cardene I.V.,194.56,193.17,rojo,activo,,,medicinas,,,activo,true
+8,Mitsubishi,636.68,2828.97,etc,activo,,,carros,,,activo,true
+9,"Mongoose, yellow",179.32,198.19,etc,activo,,,animales,,,activo,true
+10,Equaline Childrens Pain and Fever,163.39,159.23,etc,activo,,,medicinas,,,activo,true
+11,BMW,83.65,716.53,rojo,activo,,,carros,,,activo,true
+12,Carpet snake,6.89,79.81,etc,activo,,,animales,,,activo,true
+13,FIBRICOR,195.15,305.49,ok,activo,,,medicinas,,,activo,true
+14,Buick,485.08,3628.68,rojo,activo,,,carros,,,activo,true
+15,"Quail, gambel's",69.8,97.44,ok,activo,,,animales,,,activo,true
+16,Bupropion Hydrochloride,112.08,415.14,etc,activo,,,medicinas,,,activo,true
+17,Buick,986.96,2232.23,carro,activo,,,carros,,,activo,true
+18,"Hornbill, southern ground",52.09,498.72,rojo,activo,,,animales,,,activo,true
+19,Doxorubicin Hydrochloride,4.86,364.37,etc,activo,,,medicinas,,,activo,true
+20,Ford,848.57,356.49,etc,activo,,,carros,,,activo,true
+21,Northern phalarope,161.49,352.43,ok,activo,,,animales,,,activo,true
+22,Traumeel X,173.93,27.14,rojo,activo,,,medicinas,,,activo,true
+23,Nissan,872.58,4673.25,etc,activo,,,carros,,,activo,true
+24,"Eagle, bald",181.18,193.57,etc,activo,,,animales,,,activo,true
+25,Mesalamine,110.37,346.22,etc,activo,,,medicinas,,,activo,true
+26,BMW,521.16,4989.59,carro,activo,,,carros,,,activo,true
+27,Sulfur-crested cockatoo,54.85,87.25,etc,activo,,,animales,,,activo,true
+28,Imipenem and Cilastatin,20.94,194.89,carro,activo,,,medicinas,,,activo,true
+29,Ford,581.8,3465.64,rojo,activo,,,carros,,,activo,true
+30,Curve-billed thrasher,198.06,450.23,ave,activo,,,animales,,,activo,true
+31,Rebif,149.55,292.92,etc,activo,,,medicinas,,,activo,true
+32,Subaru,775.14,3770.81,carro,activo,,,carros,,,activo,true
+33,Frog ,66.5,334.58,ok,activo,,,animales,,,activo,true
+34,camioneta,8000,10000,"cajrro, viejo, rojo",desactivo,2020-10-17,2020-10-17,carros,,,activo,false

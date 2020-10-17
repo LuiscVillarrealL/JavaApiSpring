@@ -17,6 +17,7 @@
         -  Tabla Usuarios
         -  Tabla Categorias
         -  Tabla Productos
+	-  Data de Muestra (se creo data de muestra con https://www.mockaroo.com/ y se crifraron las contraseñas con python antes de ingresar)
         -  Cifrado (Cifra/decifra los pass desde post/get)
         -  Extras
             - Tabla permisos_usuario
@@ -52,8 +53,7 @@
 
 # Requerimientos Faltantes
 
- - Base de Datos
-    - Data de Muestra
+    
             
 - Api
    - Logs de Sesión
@@ -66,14 +66,16 @@
     - El API debe de tener control de error y devolver los mensajes pertinentes en caso de peticiones
 incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje de error (faltan las de los productos)
 
+
 - Entregable
    - Código fuente completo
    - 1 ejemplo de cada petición 
    - Pasos necesarios a la compilación/implementación
     
+
 - Otros puntos faltantes
-   - Comentarios en código
-   - Formato
+   - Mejorar comentarios en código
+   - Mejorar formato
 
 
 # Bugs para arreglar
@@ -97,6 +99,7 @@ incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje 
    - https://www.youtube.com/watch?v=X80nJ5T7YpE&t=1s
    - https://stackoverflow.com/questions/44404085/hasauthority-method-for-only-post-and-put-httpmethods
    - https://www.youtube.com/watch?v=YW5AqKI9w-0
+   - https://www.mockaroo.com/
    
    
 # Autor

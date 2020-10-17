@@ -1,0 +1,2 @@
+timestamp,status,error,message,path
+2020-10-17T05:20:49.167+00:00,403,Forbidden,,/api/v1/usuarios/

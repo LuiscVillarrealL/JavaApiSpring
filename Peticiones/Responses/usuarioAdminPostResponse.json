@@ -1,0 +1,1 @@
+{"id":52,"nombre":"Luis123","apellido":"Villarreal123","usuario":"admin","pass":"$2a$10$568Qcs3tPjmSLH2SvGDK/.D/li67UtRRAbc9GpLsUI1HpGQ4KLUvm","fecha_creacion":"2020-10-17T05:12:48.341+00:00","ult_ingreso":null,"estado":"activo","permisos":[{"id":2,"nombre_permiso":"USER"}],"enabled":true,"fechaCreacion":"2020-10-17T05:12:48.341+00:00","ultIngreso":null}

@@ -42,6 +42,7 @@ ult_actualizacion DATE,
 estado VARCHAR(10) NOT NULL
 );
 
+
 CREATE TABLE productos(
 
 id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
@@ -55,10 +56,11 @@ ult_actualizacion DATE
 
 );
 
-
 CREATE TABLE categorias_productos(
 id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 categoria_id INT  FOREIGN KEY REFERENCES categorias(id),
 productos_id INT  FOREIGN KEY REFERENCES productos(id)
 )
+
+
 
