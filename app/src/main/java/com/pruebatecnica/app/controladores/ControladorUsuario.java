@@ -3,8 +3,11 @@ package com.pruebatecnica.app.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,20 +42,33 @@ public class ControladorUsuario {
 
 	// 'GET' usuario por id
 	@GetMapping("/usuarios/{id}")
-	public Usuario getUsuarioPorId(@PathVariable(value = "id") Integer id) throws  RecursoNoEncontradoExcepcion{
-		return this.usuarioRepo.findById(id)
-				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
+	public ResponseEntity<Usuario> getUsuarioPorId(@PathVariable(value = "id") Integer id) throws  RecursoNoEncontradoExcepcion{
+		
+		Usuario usuario= this.usuarioRepo.findById(id).orElseThrow(() ->  new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
+		
+		
+		return ResponseEntity.ok().body(usuario);
+				
 	}
+	
+	
 
 	// 'POST'(crear) usuario
 	@PostMapping("/usuarios")
 	public Usuario crearUsuario(@RequestBody UsuarioPost post) throws RecursoNoEncontradoExcepcion {
+		
+		if (post.getPermiso() == null) {
+			throw new RecursoNoEncontradoExcepcion("No puede agregar un usuario sin permisos");
+		}
 
 		String nombre = post.getNombre();
 		String usuario_nom = post.getUsuario();
-		String pass = post.getPass();
 		String nombre_permiso = post.getPermiso();
 		String apellido = post.getApellido();
+		
+		
+		String pass = encoder().encode(post.getPass());
+		
 
 		Usuario usuario = new Usuario(nombre, apellido, usuario_nom, pass);
 
@@ -60,7 +76,7 @@ public class ControladorUsuario {
 		Permisos permiso = this.permisosRepo.getPermisosByNombre(nombre_permiso);
 
 		if (permiso == null) {
-			throw new RecursoNoEncontradoExcepcion("Permiso: " + permiso + " no encontrado");
+			throw new RecursoNoEncontradoExcepcion("Permiso: " + nombre_permiso + " no encontrado");
 		}
 
 		permiso.getUsuarios().add(usuario);
@@ -71,21 +87,34 @@ public class ControladorUsuario {
 
 	// 'PUT' (update) usuario
 	@PutMapping("/usuarios/{id}")
-	public Usuario updateUsuario(@RequestBody UsuarioPost post, @PathVariable("id") Integer id) {
+	public Usuario updateUsuario(@RequestBody UsuarioPost post, @PathVariable("id") Integer id) throws RecursoNoEncontradoExcepcion {
 		Usuario usuarioActual = this.usuarioRepo.findById(id)
 				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
+		
+		if (post.getPermiso() == null) {
+			throw new RecursoNoEncontradoExcepcion("No actualizar un usuario sin permisos");
+		}
+		
+		
+
+		
 		usuarioActual.setNombre(post.getNombre());
 		usuarioActual.setApellido(post.getApellido());
 		usuarioActual.setEstado(post.getEstado());
-		usuarioActual.setPass(post.getPass());
-		usuarioActual.setUltIngreso();
+		
+	
+		
+	
 
 		Permisos permiso = this.permisosRepo.getPermisosByNombre(post.getPermiso());
-
 		if (permiso == null) {
-			throw new UsernameNotFoundException("Permiso: " + permiso + " no encontrado");
+			throw new UsernameNotFoundException("Permiso: " + post.getPermiso() + " no encontrado");
 		}
 
+		
+		
+		
+		
 		
 		//Para actualizar, se borran todos los permisos y se agregan denuevo con los nuevos
 		usuarioActual.getPermisos().clear();
@@ -97,6 +126,12 @@ public class ControladorUsuario {
 		return this.usuarioRepo.save(usuarioActual);
 	}
 
+	
+	//cifrado de pass en post
+	@Bean
+	public PasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
+	}
 	
 	/*
 	// borrar/desactivar por id

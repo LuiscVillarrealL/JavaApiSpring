@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,14 +37,18 @@ public class ControladorProductos {
 
 	// 'GET' usuario por id
 	@GetMapping("/productos/{id}")
-	public Productos getProductosPorId(@PathVariable(value = "id") Integer id) {
+	public Productos getProductosPorId(@PathVariable(value = "id") Integer id) throws RecursoNoEncontradoExcepcion {
 		return this.productosRepo.findById(id)
 				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("Productos no encontrado"));
 	}
 
 	// 'POST' (crear) producto
 	@PostMapping("/productos")
-	public Productos crearProductos(@RequestBody ProductosPost post) throws Exception {
+	public Productos crearProductos(@RequestBody ProductosPost post) throws RecursoNoEncontradoExcepcion {
+		
+		
+		//Faltan las excepciones
+		
 
 		String nombre = post.getNombre();
 		Float costo = post.getCosto();
@@ -54,6 +57,7 @@ public class ControladorProductos {
 		List<String> categorias = post.getCategorias();
 
 		List<Categorias> catExistentes = extraerCategorias(categorias);
+		
 		Productos producto = new Productos(nombre, costo, precio, tags);
 		agregarCategorias(catExistentes, producto);
 		
@@ -64,7 +68,7 @@ public class ControladorProductos {
 	
 	
 	//De una lista de strings, saca los objetos de categorias 
-	private List<Categorias> extraerCategorias(List<String> categorias) {
+	private List<Categorias> extraerCategorias(List<String> categorias) throws RecursoNoEncontradoExcepcion {
 		List<Categorias> catExistentes = new ArrayList<>();
 
 		for (String cat : categorias) {
@@ -72,7 +76,7 @@ public class ControladorProductos {
 			Categorias temp = this.categoriasRepo.getCategoriaByNombre(cat);
 
 			if (temp == null) {
-				throw new UsernameNotFoundException("Categoria: " + temp + " no encontrado");
+				throw new RecursoNoEncontradoExcepcion("Categoria: " + temp + " no encontrado");
 			}
 
 			catExistentes.add(temp);
@@ -94,7 +98,7 @@ public class ControladorProductos {
 
 	// 'PUT' (update) producto
 	@PutMapping("/productos/{id}")
-	public Productos updateProductos(@RequestBody ProductosPost post, @PathVariable("id") Integer id) {
+	public Productos updateProductos(@RequestBody ProductosPost post, @PathVariable("id") Integer id) throws RecursoNoEncontradoExcepcion {
 		Productos ProductoActual = this.productosRepo.findById(id)
 				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("Productos no encontrado"));
 

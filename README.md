@@ -17,7 +17,7 @@
         -  Tabla Usuarios
         -  Tabla Categorias
         -  Tabla Productos
-        -  Cifrado 
+        -  Cifrado (Cifra/decifra los pass desde post/get)
         -  Extras
             - Tabla permisos_usuario
             - Tabla categorias_productos
@@ -43,6 +43,7 @@
        
 - Normas
    - Api cumple con las convenciones REST de verbo (get/post/put)
+   - Desactiva por PUT en funcionamiento (PUT de usuario bugged)
    
    
 
@@ -61,11 +62,9 @@
 
        
 - Normas
-   - El API NO debe de ejecutar DELETE ni borrar registro de la base de datos, debe de marcarlos como
-“desactivados”
 
     - El API debe de tener control de error y devolver los mensajes pertinentes en caso de peticiones
-incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje de error 
+incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje de error (faltan las de los productos)
 
 - Entregable
    - Código fuente completo
@@ -79,6 +78,7 @@ incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje 
 
 # Bugs para arreglar
    - Get en categorias no muestra id
+   - Arreglar PUTs 
 
 
 # Notas
@@ -96,6 +96,7 @@ incorrecta/malformadas. NO debe de generar errores 500 sino devolver un mensaje 
    - https://www.youtube.com/watch?v=PHB917iikjk 
    - https://www.youtube.com/watch?v=X80nJ5T7YpE&t=1s
    - https://stackoverflow.com/questions/44404085/hasauthority-method-for-only-post-and-put-httpmethods
+   - https://www.youtube.com/watch?v=YW5AqKI9w-0
    
    
 # Autor

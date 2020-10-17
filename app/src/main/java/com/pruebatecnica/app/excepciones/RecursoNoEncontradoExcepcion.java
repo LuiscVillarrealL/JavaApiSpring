@@ -4,15 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class RecursoNoEncontradoExcepcion extends RuntimeException{
+public class RecursoNoEncontradoExcepcion extends Exception{
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public RecursoNoEncontradoExcepcion(String mensaje) {
-		super(mensaje);
-	}
+    public RecursoNoEncontradoExcepcion(String message){
+        super(message);
+    }
 }

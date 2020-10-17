@@ -19,7 +19,6 @@ import com.pruebatecnica.app.postobj.CategoriaPost;
 
 import com.pruebatecnica.app.repositorio.CategoriasRepo;
 
-
 @RestController
 @RequestMapping("/api/v1")
 public class ControladorCategoria {
@@ -28,22 +27,22 @@ public class ControladorCategoria {
 	@Autowired
 	private CategoriasRepo categoriasRepo;
 
-	
 	// 'GET' todas categorias
 	@GetMapping("/categorias")
 	public List<Categorias> getAllCategorias() {
 		return (List<Categorias>) this.categoriasRepo.findAll();
 	}
 
+	
 	// 'GET' categoria por id
 	@GetMapping("/categorias/{id}")
-	public Categorias getCategoriaPorId(@PathVariable(value = "id") Integer id) throws Exception  {
+	public Categorias getCategoriaPorId(@PathVariable(value = "id") Integer id) throws RecursoNoEncontradoExcepcion {
 		return this.categoriasRepo.findById(id)
 				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("Categoria no encontrada"));
 	}
 
 	
-	// 'POST' (crear) categoria 
+	// 'POST' (crear) categoria
 	@PostMapping("/categorias")
 	public Categorias crearCategoria(@RequestBody CategoriaPost post) throws Exception {
 
@@ -57,7 +56,8 @@ public class ControladorCategoria {
 	
 	// 'PUT' (update) categoria por id
 	@PutMapping("/categorias/{id}")
-	public Categorias updateCategorias(@RequestBody CategoriaPost post, @PathVariable("id") Integer id) {
+	public Categorias updateCategorias(@RequestBody CategoriaPost post, @PathVariable("id") Integer id)
+			throws RecursoNoEncontradoExcepcion {
 		Categorias categoriasActual = this.categoriasRepo.findById(id)
 				.orElseThrow(() -> new RecursoNoEncontradoExcepcion("categoria no encontrada"));
 
@@ -71,11 +71,11 @@ public class ControladorCategoria {
 		return this.categoriasRepo.save(categoriasActual);
 	}
 
-	// No debe desactivar. 
-	/*@DeleteMapping("/categoriasRepo/{id}")
-	public ResponseEntity<Usuario> deactivarUsuario(@PathVariable("id") Integer id) {
-
-		return null;
-	}
-*/
+	// No debe desactivar.
+	/*
+	 * @DeleteMapping("/categoriasRepo/{id}") public ResponseEntity<Usuario>
+	 * deactivarUsuario(@PathVariable("id") Integer id) {
+	 * 
+	 * return null; }
+	 */
 }

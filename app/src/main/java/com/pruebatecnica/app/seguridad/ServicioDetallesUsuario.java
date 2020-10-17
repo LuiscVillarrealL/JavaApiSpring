@@ -18,6 +18,10 @@ public class ServicioDetallesUsuario implements UserDetailsService {
 	public DetallesUsuario loadUserByUsername(String usuarioNom) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		Usuario usuario = usuarioRepo.getUserByUsuario(usuarioNom);
+		
+		
+		//TODO guardar usuario en basededatos logs
+		
 
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuario: " + usuarioNom + " no encontrado");

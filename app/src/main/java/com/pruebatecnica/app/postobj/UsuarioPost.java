@@ -28,7 +28,6 @@ public class UsuarioPost {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuario = usuario;
-		this.pass = pass;
 		this.permiso = permiso;
 		this.estado = estado;
 
